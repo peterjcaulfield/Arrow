@@ -15,7 +15,7 @@ abstract class Proxy
         static::$app = $app;
     }
 
-    protected function getProxiedObject()
+    public function getProxiedObject()
     {
         return static::resolveProxyInstance(static::getProxyAccessor());
     }
