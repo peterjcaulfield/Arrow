@@ -2,7 +2,12 @@
 
 namespace Arrow;
 
-class Proxy
+abstract class Proxy
 {
+    protected static $app;
 
+    public static function setProxyApplication($app)
+    {
+        static::$app = $app;
+    }
 }
