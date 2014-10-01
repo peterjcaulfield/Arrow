@@ -15,6 +15,13 @@ abstract class Proxy
         static::$app = $app;
     }
 
+    public static function swap($instance)
+    {
+        static::$resolvedInstance[static::getProxyAccessor()] = $instance;
+
+        static::$app[static::getProxyAccessor()] = $instance;
+    }
+
     public function getProxiedObject()
     {
         return static::resolveProxyInstance(static::getProxyAccessor());
