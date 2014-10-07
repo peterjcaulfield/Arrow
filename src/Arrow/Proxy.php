@@ -4,25 +4,20 @@ namespace Arrow;
 
 abstract class Proxy
 {
-    protected static $app;
+    protected static $container;
 
     protected static $resolvedInstance;
 
-    public function getProxyAccessor();
-
-    public static function setProxiedApplication($app)
-    {
-        static::$app = $app;
-    }
+    abstract public static function getProxyAccessor();
 
     public static function swap($instance)
     {
         static::$resolvedInstance[static::getProxyAccessor()] = $instance;
 
-        static::$app[static::getProxyAccessor()] = $instance;
+        static::$container[static::getProxyAccessor()] = $instance;
     }
 
-    public function getProxiedObject()
+    public static function getProxiedObject()
     {
         return static::resolveProxyInstance(static::getProxyAccessor());
     }
@@ -33,10 +28,25 @@ abstract class Proxy
             return static::$resolvedInstance[$name];
         }
 
-        return static $resolvedInstance[$name] = static::$app[$name];
+        return static::$resolvedInstance[$name] = static::$container[$name];
     }
 
-    public function __callStatic($method, $args)
+    public static function clearResolvedInstances()
+    {
+        static::$resolvedInstance = array();
+    }
+
+    public static function setProxiedContainer($container)
+    {
+        static::$container = $container;
+    }
+
+    public static function getProxiedContainer()
+    {
+        return static::$container;
+    }
+
+    public static function __callStatic($method, $args)
     {
         $instance = static::getProxiedObject();
 

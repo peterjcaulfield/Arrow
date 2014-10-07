@@ -1,0 +1,20 @@
+{
+    "name": "peterjcaulfield/arrow",
+    "description": "general purpose service locator based on laravel facades",
+    "require-dev": {
+        "mockery/mockery": "~0.9"
+    },
+    "authors": [
+        {
+            "name": "Peter Caulfield",
+            "email": "peterjcaulfield@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+    },
+    "autoload" : {
+        "psr-0" : { "Arrow" : "src/" }
+    }
+}
