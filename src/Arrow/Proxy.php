@@ -50,7 +50,7 @@ abstract class Proxy
     {
         $instance = static::getProxiedObject();
 
-        if (!count($args)) return $instance->method();
+        if (!count($args)) return $instance->$method();
 
         return call_user_func_array(array($instance, $method), $args);
     }
