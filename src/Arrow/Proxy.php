@@ -8,7 +8,10 @@ abstract class Proxy
 
     protected static $resolvedInstance;
 
-    abstract public static function getProxyAccessor();
+    protected static function getProxyAccessor()
+    {
+        throw new \RuntimeException("Proxy does not implement getProxyAccessor method.");
+    }
 
     public static function swap($instance)
     {
